@@ -5,6 +5,8 @@ const issueModel = require("../models/issues");
 const memberModel = require("../models/members");
 const projectModel = require("../models/projects");
 
+const mongoose = require('mongoose');
+
 module.exports = router;
 
 /**
@@ -106,7 +108,7 @@ router.post("/projects/new", (req, res) => {
 
 router.patch("/issue/:id", async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = mongoose.Types.ObjectId(req.params.id);
     const updatedData = req.body;
     const options = { new: true };
     const result = await issueModel.findByIdAndUpdate(id, updatedData, options);
