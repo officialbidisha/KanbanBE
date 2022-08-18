@@ -109,10 +109,14 @@ router.post("/projects/new", (req, res) => {
 router.patch("/issue/:id", async (req, res) => {
   try {
     const id = mongoose.Types.ObjectId(req.params.id);
+    console.log(id);
     const updatedData = req.body;
+    console.log(updatedData);
     const options = { new: true };
     const result = await issueModel.findByIdAndUpdate(id, updatedData, options);
+    console.log(result);
     res.send(result);
+    
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
