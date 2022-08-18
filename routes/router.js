@@ -142,15 +142,15 @@ router.get("/issue/startsWith/:data", async (req, res) => {
  */
 router.post("/member/includes/", async (req, res) => {
   try {
-    const data = await memberModel.find();
+    const data = await  memberModel.find();
     const list = req.body.data;
     const filteredData = [];
-    for (let i = 0; i < list.length; i++) {
-      data.forEach((x) => {
-        if (x.name.includes(list[i])) {
-          filteredData.push(x);
-        }
-      });
+    for(let i=0;i<list.length;i++){
+      for(let j=0;j<data.length;j++){
+       if(data[j].name.includes(list[i])){
+         filteredData.push(data[j]);
+       }
+      }
     }
     res.json(filteredData);
   } catch (error) {
