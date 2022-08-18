@@ -144,7 +144,7 @@ router.post("/member/includes/", async (req, res) => {
   try {
     const data = await  memberModel.find();
     const list = req.body.data;
-    const filteredData = [];
+    let filteredData = [];
     for(let i=0;i<list.length;i++){
       for(let j=0;j<data.length;j++){
        if(data[j].name.includes(list[i])){
@@ -152,6 +152,7 @@ router.post("/member/includes/", async (req, res) => {
        }
       }
     }
+    filteredData = filteredData.length>0? filteredData: data;
     res.json(filteredData);
   } catch (error) {
     res.status(500).json({ message: error.message });
